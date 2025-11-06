@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.SearchView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,8 +17,11 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 private lateinit var listado: ListView
+private lateinit var buscador: SearchView
 private lateinit var listausuario: ArrayList<String>
+private lateinit var listaFiltrada: ArrayList<String>
 private lateinit var listaJSON: JSONArray
+private lateinit var adapter: ArrayAdapter<String>
 
 class Act_Listado : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,25 +41,43 @@ class Act_Listado : AppCompatActivity() {
         }
 
         listado = findViewById(R.id.lista)
+        buscador = findViewById(R.id.buscador)
+
         cargarUsuariosActivos()
 
-        // 👇 Evento de clic en la lista
+        // 🔹 Configurar filtro del buscador
+        buscador.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filtrarUsuarios(newText ?: "")
+                return true
+            }
+        })
+
+        // 🔹 Evento clic en la lista
         listado.setOnItemClickListener { _, _, position, _ ->
             try {
-                val user = listaJSON.getJSONObject(position)
-                val id = user.getInt("id").toString()
-                val nombre = user.getString("nombres")
-                val apellido = user.getString("apellidos")
-                val email = user.getString("email")
+                // Buscar coincidencia exacta con la lista JSON
+                val lineaSeleccionada = listaFiltrada[position]
+                val id = lineaSeleccionada.substringBefore(" - ").trim()
 
-                // Intent hacia Act_List_info
-                val intent = Intent(this, Act_List_info::class.java).apply {
-                    putExtra("id", id)
-                    putExtra("Nombre", nombre)
-                    putExtra("Apellido", apellido)
-                    putExtra("Email", email)
+                // Buscar en el JSON el usuario que tenga ese id
+                for (i in 0 until listaJSON.length()) {
+                    val user = listaJSON.getJSONObject(i)
+                    if (user.getInt("id").toString() == id) {
+                        val intent = Intent(this, Act_List_info::class.java).apply {
+                            putExtra("id", id)
+                            putExtra("Nombre", user.getString("nombres"))
+                            putExtra("Apellido", user.getString("apellidos"))
+                            putExtra("Email", user.getString("email"))
+                        }
+                        startActivity(intent)
+                        break
+                    }
                 }
-                startActivity(intent)
             } catch (e: Exception) {
                 mostrarAlerta("Error", "No se pudieron obtener los datos del usuario seleccionado.")
             }
@@ -85,7 +107,8 @@ class Act_Listado : AppCompatActivity() {
                             listausuario.add("$id - $nombre - $apellido - $email")
                         }
 
-                        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listausuario)
+                        listaFiltrada = ArrayList(listausuario)
+                        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaFiltrada)
                         listado.adapter = adapter
                     } else {
                         mostrarAlerta("Sin usuarios", "No se encontraron usuarios activos.")
@@ -98,6 +121,22 @@ class Act_Listado : AppCompatActivity() {
         )
 
         Volley.newRequestQueue(this).add(request)
+    }
+
+    private fun filtrarUsuarios(texto: String) {
+        val filtro = texto.lowercase()
+        listaFiltrada.clear()
+
+        if (filtro.isEmpty()) {
+            listaFiltrada.addAll(listausuario)
+        } else {
+            for (item in listausuario) {
+                if (item.lowercase().contains(filtro)) {
+                    listaFiltrada.add(item)
+                }
+            }
+        }
+        adapter.notifyDataSetChanged()
     }
 
     private fun mostrarAlerta(titulo: String, mensaje: String) {
@@ -113,3 +152,4 @@ class Act_Listado : AppCompatActivity() {
         cargarUsuariosActivos()
     }
 }
+

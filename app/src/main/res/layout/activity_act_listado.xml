@@ -16,10 +16,10 @@
         android:background="#40cfff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/buscador" />
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/buscador"
         android:layout_width="360dp"
         android:layout_height="69dp"
         android:layout_marginTop="30dp"
