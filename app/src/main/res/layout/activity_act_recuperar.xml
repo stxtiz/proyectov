@@ -77,16 +77,17 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correo" />
+        app:layout_constraintTop_toBottomOf="@+id/correo_contra" />
 
     <EditText
-        android:id="@+id/correo"
+        android:id="@+id/correo_contra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textAlignment="center"
         android:textColor="#3D095F"
         android:textSize="20sp"
         android:textStyle="bold"

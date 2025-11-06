@@ -28,7 +28,7 @@ class Act_Recuperar : AppCompatActivity() {
     private lateinit var c5: EditText
     private lateinit var contador: EditText
 
-    private var codigoVigente = false // Controla si el código sigue activo
+    private var codigoVigente = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class Act_Recuperar : AppCompatActivity() {
         }
 
         // 🔹 Vincular elementos del layout
-        correo = findViewById(R.id.correo)
+        correo = findViewById(R.id.correo_contra)
         btnRecuperar = findViewById(R.id.recuperar)
         c1 = findViewById(R.id.codigo_1)
         c2 = findViewById(R.id.codigo_2)
@@ -108,7 +108,6 @@ class Act_Recuperar : AppCompatActivity() {
         })
     }
 
-    // ✅ Enviar el código de recuperación al correo
     private fun enviarCodigoAlPHP(email: String) {
         val url = "http://54.89.22.17/enviar_codigo.php"
 
@@ -160,7 +159,7 @@ class Act_Recuperar : AppCompatActivity() {
 
     //  Validar el código ingresado con el servidor
     private fun validarCodigoPHP(email: String, codigo: String) {
-        val url = "http://54.89.22.17/validar_codigo.php"
+        val url = "http://54.89.22.17/validarCodigo.php"
 
         val request = object : StringRequest(Method.POST, url,
             { response ->
@@ -214,7 +213,6 @@ class Act_Recuperar : AppCompatActivity() {
         Volley.newRequestQueue(this).add(request)
     }
 
-    // ⏱ Iniciar contador de 60 segundos
     private fun iniciarContador() {
         codigoVigente = true
 

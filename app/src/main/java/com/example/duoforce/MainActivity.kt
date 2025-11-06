@@ -107,22 +107,13 @@ class MainActivity : AppCompatActivity() {
 
 
         btnregistrarme.setOnClickListener {
+            // 🔹 Solo abrir la pantalla de registro, sin mostrar alerta
             startActivity(Intent(this, Act_Registro::class.java))
-            SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Registro")
-                .setContentText("Registro exitoso. Ya puedes iniciar sesión.")
-                .setConfirmText("Ok")
-                .show()
         }
 
 
         btnolvidocontra.setOnClickListener {
             startActivity(Intent(this, Act_Recuperar::class.java))
-            SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Recuperación")
-                .setContentText("Enlace de recuperación enviado a tu correo.")
-                .setConfirmText("Listo")
-                .show()
         }
     }
 

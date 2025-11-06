@@ -73,7 +73,7 @@ class Act_Guardar : AppCompatActivity() {
     // Envío de la nueva contraseña al servidor PHP
     private fun cambiarPassword(nuevaPassword: String) {
         val email = intent.getStringExtra("email") ?: ""
-        val url = "http://54.89.22.17/cambiar_contra.php" // ✅ Ajusta tu endpoint PHP si es distinto
+        val url = "http://54.89.22.17/cambiarContrasenia.php"
 
         val request = object : StringRequest(
             Request.Method.POST, url,
@@ -85,7 +85,7 @@ class Act_Guardar : AppCompatActivity() {
                         .setConfirmText("Ir al Login")
                         .setConfirmClickListener { dialog ->
                             dialog.dismissWithAnimation()
-                            // Redirige a tu pantalla principal o login
+
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
