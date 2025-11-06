@@ -166,7 +166,7 @@ class Act_List_info : AppCompatActivity() {
     }
 
     private fun eliminarUsuario() {
-        val url = "http://54.89.22.17/eliminar_usuario.php"
+        val url = "http://54.89.22.17/eliminarUsuario.php"
 
         val request = object : StringRequest(
             Request.Method.POST, url,
