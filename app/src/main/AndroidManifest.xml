@@ -19,7 +19,7 @@
             android:name=".Act_Registro"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Act_principal"
             android:exported="false" />
         <activity
             android:name=".Act_Listado"
@@ -37,7 +37,7 @@
             android:name=".SwAlert"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Desarrolladores"
@@ -49,7 +49,7 @@
             android:name=".Act_Crud"
             android:exported="false" />
         <activity
-            android:name=".Act_principal"
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

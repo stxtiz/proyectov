@@ -48,12 +48,12 @@ class MainActivity : AppCompatActivity() {
 
         datos = Volley.newRequestQueue(this)
 
-        // Ingresar
+
         btningresar.setOnClickListener {
             val u = usu.text.toString().trim()
             val p = clave.text.toString().trim()
 
-            // Campos obligatorios
+
             if (u.isEmpty() && p.isEmpty()) {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Campos obligatorios")
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Email inválido si parece correo
+
             if (u.contains("@") && !Patterns.EMAIL_ADDRESS.matcher(u).matches()) {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Email inválido")
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Loading
+
             btningresar.isEnabled = false
             SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).apply {
                 progressHelper.barColor = resources.getColor(android.R.color.holo_blue_light, theme)
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Registrarse (enlace visible siempre)
+
         btnregistrarme.setOnClickListener {
             startActivity(Intent(this, Act_Registro::class.java))
             SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 .show()
         }
 
-        // Recuperar contraseña (enlace visible siempre)
+
         btnolvidocontra.setOnClickListener {
             startActivity(Intent(this, Act_Recuperar::class.java))
             SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
@@ -133,10 +133,7 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET, url, null,
             { response ->
                 try {
-                    // Mapea estados a requisitos:
-                    // "0" => credenciales inválidas
-                    // "3" => usuario bloqueado (según tu ejemplo)
-                    // "1" => login OK
+
                     val estado = response.optString("estado", "")
                     when (estado) {
                         "0" -> {

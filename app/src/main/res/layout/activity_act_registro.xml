@@ -8,6 +8,23 @@
     tools:context=".Act_Registro">
 
     <EditText
+        android:id="@+id/txtclave2"
+        android:layout_width="200dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Repetir Contraseña"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#3D095F"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtclave" />
+
+    <EditText
         android:id="@+id/txtapellido"
         android:layout_width="200dp"
         android:layout_height="40dp"
@@ -53,7 +70,7 @@
         android:id="@+id/txtclave"
         android:layout_width="200dp"
         android:layout_height="44dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
@@ -70,13 +87,13 @@
         android:id="@+id/btn_registro"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:text="Registrar"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtclave" />
+        app:layout_constraintTop_toBottomOf="@+id/txtclave2" />
 
     <EditText
         android:id="@+id/txtemail"

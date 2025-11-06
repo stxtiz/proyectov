@@ -158,7 +158,7 @@ class Act_Recuperar : AppCompatActivity() {
         Volley.newRequestQueue(this).add(request)
     }
 
-    // ✅ Validar el código ingresado con el servidor
+    //  Validar el código ingresado con el servidor
     private fun validarCodigoPHP(email: String, codigo: String) {
         val url = "http://54.89.22.17/validar_codigo.php"
 

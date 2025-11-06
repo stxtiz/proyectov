@@ -31,26 +31,22 @@ class Act_List_info : AppCompatActivity() {
         mod = findViewById(R.id.btn_modificar)
         elim = findViewById(R.id.btn_eliminar)
 
-        // Recibir datos del intent
         userId = intent.getStringExtra("id")
         nom.setText(intent.getStringExtra("Nombre"))
         ape.setText(intent.getStringExtra("Apellido"))
         email.setText(intent.getStringExtra("Email"))
 
-        // Botón modificar
         mod.setOnClickListener {
             if (validarCampos()) {
                 confirmarModificacion()
             }
         }
 
-        // Botón eliminar
         elim.setOnClickListener {
             confirmarEliminacion()
         }
     }
 
-    // ✅ Validar campos
     private fun validarCampos(): Boolean {
         val nombre = nom.text.toString().trim()
         val apellido = ape.text.toString().trim()
@@ -92,7 +88,6 @@ class Act_List_info : AppCompatActivity() {
             .show()
     }
 
-    // ⚠ Confirmar modificación
     private fun confirmarModificacion() {
         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
             .setTitleText("¿Guardar cambios?")
@@ -106,7 +101,6 @@ class Act_List_info : AppCompatActivity() {
             .show()
     }
 
-    // ⚠ Confirmar eliminación
     private fun confirmarEliminacion() {
         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
             .setTitleText("¿Eliminar usuario?")
@@ -120,9 +114,8 @@ class Act_List_info : AppCompatActivity() {
             .show()
     }
 
-    // 🔄 Modificar usuario en servidor
     private fun modificarUsuario() {
-        val url = "http://54.89.22.17/modificar_usuario.php"
+        val url = "http://54.89.22.17/modificarUsuario.php"
 
         val request = object : StringRequest(Request.Method.POST, url,
             { response ->
@@ -172,7 +165,6 @@ class Act_List_info : AppCompatActivity() {
         Volley.newRequestQueue(this).add(request)
     }
 
-    // ❌ Eliminar usuario en servidor
     private fun eliminarUsuario() {
         val url = "http://54.89.22.17/eliminar_usuario.php"
 
